@@ -1,0 +1,59 @@
+{% extends 'homepage.html' %}
+{% include "navbar.html" %}
+
+{% block titulo %}
+Perfil {{usuario}} -  FakePinterest
+{% endblock titulo %}
+
+{% block body %}
+<body>
+    <div class="container">
+    {% if form %}
+          <form method="POST" enctype="multipart/form-data" class="bloco-add-img">
+          {{ form.csrf_token }}
+            <h2> {{usuario.username}} - Enviar foto</h2>
+            <div class="bloco-arquivo">
+              <label for="foto" class="botao-arquivo">
+                Escolher arquivo
+                {{ form.foto(class="input-arquivo", id="foto") }}
+              </label>
+              <span id="imagem-arquivo" class=""></span>
+            </div>
+                {{ form.botao_enviar(class="botao-login") }}
+          </form>
+      </div>
+    {% else%}
+    <div class="bloco-add-img">
+        <h2> Perfil do - {{usuario.username}} </h2>
+
+    {% endif%}
+
+    <div class="conteudo">
+      {% for foto in usuario.fotos %}
+      <div class="bloco-imagem">
+          <a href="{{url_for('perfil', id_usuario=foto.id_usuario)}}">
+              <img src="{{ url_for('static', filename='fotos_posts/') + foto.imagem}}" />
+          </a>
+
+      </div>
+       {% endfor %}
+    </div>
+    <!-- Podemos adicionar uma variável dentro da tag tanto podemos utilizar um .format() ou conccatenar como fizemos no
+    exemplo a cima-->
+    </div>
+
+    <script>
+      let input = document.getElementById("foto");
+      let imagemArquivo = document.getElementById("imagem-arquivo");
+
+      input.addEventListener("change", () => {
+        let inputImagem = document.querySelector("input[type=file]").files[0];
+
+        imagemArquivo.classList.add("visivel");
+        imagemArquivo.innerText = inputImagem.name;
+      });
+    </script>
+</body>
+{% endblock body %}
+
+
