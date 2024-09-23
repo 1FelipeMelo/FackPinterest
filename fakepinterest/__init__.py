@@ -8,11 +8,16 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 
-
 app = Flask(__name__)
 
-# Configuração para criar o banco de dados
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///comunidade.db"
+# Criando lógica para se o programa tiver online, conectar no banco de dados online
+import os
+
+if os.getenv('DEBUG') == 0:
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_WEB')
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://db_fakepinterest_m037_user:CzAYdUGIQ4DMG6w2hdDNWouhUI7ADSGR@dpg-crotv9u8ii6s739qrch0-a.oregon-postgres.render.com/db_fakepinterest_m037"
+
 
 # Para as auteraçõoes funcionar na parte de login precisamos fazer mais configurações no 'app'
 app.config["SECRET_KEY"] = 'f3ac9280d80a4820aa36ad32a4ca1f0d'       # Geramos uma chave de alta segurança para garantir a segurança do usuarios

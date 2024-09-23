@@ -28,7 +28,7 @@ def homepage():
         # Verifica se encontrou o usuario
         if usuario:
             # Verifica se a senha que ele passou esta correra
-            if bcrypt.check_password_hash(usuario.senha, formlogin.senha.data):
+            if bcrypt.check_password_hash(usuario.senha.econd('utf-8'), formlogin.senha.data):
                 login_user(usuario)  # fazendo login
 
                 return redirect(url_for("perfil", id_usuario=usuario.id))
@@ -42,7 +42,7 @@ def criarconta():
 
     if form_criarconta.validate_on_submit():        # Verificando se o fromulário é válido
 
-        senha = bcrypt.generate_password_hash(form_criarconta.senha.data)   # Cripitografando a senha antes de criar o usuario
+        senha = bcrypt.generate_password_hash(form_criarconta.senha.data).decode('utf-8')   # Cripitografando a senha antes de criar o usuario
         # Configurando usuario para inserir na tabela
         usuario = Usuario(email=form_criarconta.email.data, senha=senha, username=form_criarconta.username.data)
         database.session.add(usuario)   # Inserindo o usuario dentro do banco de dados
