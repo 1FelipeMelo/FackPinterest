@@ -28,7 +28,7 @@ def homepage():
         # Verifica se encontrou o usuario
         if usuario:
             # Verifica se a senha que ele passou esta correra
-            if bcrypt.check_password_hash(usuario.senha.econd('utf-8'), formlogin.senha.data):
+            if bcrypt.check_password_hash(usuario.senha.econde('utf-8'), formlogin.senha.data):
                 login_user(usuario)  # fazendo login
 
                 return redirect(url_for("perfil", id_usuario=usuario.id))

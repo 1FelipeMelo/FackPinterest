@@ -18,7 +18,6 @@ if os.getenv('DEBUG') == 0:
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///comunidade.db"
 
-
 # Para as auteraçõoes funcionar na parte de login precisamos fazer mais configurações no 'app'
 app.config["SECRET_KEY"] = 'f3ac9280d80a4820aa36ad32a4ca1f0d'       # Geramos uma chave de alta segurança para garantir a segurança do usuarios
 
