@@ -16,7 +16,7 @@ import os
 if os.getenv('DEBUG') == 0:
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_WEB')
 else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://db_fakepinterest_m037_user:CzAYdUGIQ4DMG6w2hdDNWouhUI7ADSGR@dpg-crotv9u8ii6s739qrch0-a.oregon-postgres.render.com/db_fakepinterest_m037"
+    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///comunidade.db"
 
 
 # Para as auteraçõoes funcionar na parte de login precisamos fazer mais configurações no 'app'
