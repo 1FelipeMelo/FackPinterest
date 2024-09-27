@@ -32,21 +32,20 @@ def homepage():
                 login_user(usuario)  # fazendo login
 
                 return redirect(url_for("perfil", id_usuario=usuario.id))
-
     return render_template("homepage.html", form=formlogin)
 
 @app.route("/criarconta", methods=['GET', 'POST'])
 def criarconta():
     form_criarconta = FormCriarConta()      # vamos enviar para dentro do html a variavel 'form'
 
-
     if form_criarconta.validate_on_submit():        # Verificando se o fromulário é válido
-
         senha = bcrypt.generate_password_hash(form_criarconta.senha.data).decode('utf-8')   # Cripitografando a senha antes de criar o usuario
         # Configurando usuario para inserir na tabela
-        usuario = Usuario(email=form_criarconta.email.data, senha=senha, username=form_criarconta.username.data)
+        usuario = Usuario(email=form_criarconta.email.data,
+                          senha=senha, username=form_criarconta.username.data)
         database.session.add(usuario)   # Inserindo o usuario dentro do banco de dados
         database.session.commit()
+
         # Redirecinado agora o usuario para sua conta, antes de redirecionar, precisamos fazero o login, pois nossa função exige isso
         login_user(usuario, remember=True)
         return redirect(url_for("perfil", id_usuario=usuario.id))
@@ -102,3 +101,10 @@ def feed():
     fotos = Foto.query.order_by(Foto.data_criacao.desc()).all()[:50]
 
     return render_template('feed.html', fotos=fotos)
+
+
+@app.route('/foto')
+@login_required
+def foto():
+    return render_template('visualisar_foto.html')
+

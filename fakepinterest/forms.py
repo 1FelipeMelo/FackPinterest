@@ -35,9 +35,13 @@ class FormCriarConta(FlaskForm):
     email = StringField('E-mail', validators=[DataRequired(), Email()])
     username = StringField("Nome de usuário", validators=[DataRequired()])
 
+
     senha = PasswordField("Senha", validators=[DataRequired(), Length(6, 20)])
-    confirmacao_senha = PasswordField("Confirme sua senha", validators=[DataRequired(), EqualTo("senha")])
+    confirmacao_senha = PasswordField("Confirmação de Senha", validators=[DataRequired(), EqualTo("senha")])
+
+    print(senha == confirmacao_senha)
     botao_confirmacao = SubmitField("Criar Conta")
+
 
     # Verificar se o E-mail já é cadastrado
     # É obrigatorio que o nome da função seja 'validete_' + 'nome da variavel que vamos verificar'
@@ -50,6 +54,7 @@ class FormCriarConta(FlaskForm):
             raise ValidationError("O E-mail ja está cadastrado, faça login.")
 
     def validate_senha(self, confirmacao_senha):
+
         if confirmacao_senha:
             raise ValidationError('Senhas Inválida')
 
