@@ -1,7 +1,7 @@
 # Arquivo obrigatorio para o flask (com esse nome o Python vai reconhecer que é um projeto Flask)
 # Ele que vamos usar para criar o app
 
-from flask import Flask
+from flask import Flask, request, flash
 from flask_sqlalchemy import SQLAlchemy
 
 # Ajuste que vamos precisar fazer para trabalar com login e senha

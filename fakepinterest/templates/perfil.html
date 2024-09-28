@@ -24,14 +24,14 @@ Perfil {{usuario}} -  FakePinterest
       </div>
     {% else%}
     <div class="bloco-add-img">
-        <h2> Perfil do - {{usuario.username}} </h2>
+        <h2 class="usuario"> Perfil - {{usuario.username}} </h2>
 
     {% endif%}
 
     <div class="conteudo">
       {% for foto in usuario.fotos %}
       <div class="bloco-imagem">
-          <a href="{{url_for('perfil', id_usuario=foto.id_usuario)}}">
+          <a href="{{ url_for('foto', id_usuario=foto.id_usuario, foto=foto.imagem, id_foto=foto.id) }}" class="bloco-imagem">">
               <img src="{{ url_for('static', filename='fotos_posts/') + foto.imagem}}" />
           </a>
 

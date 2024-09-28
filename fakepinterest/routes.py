@@ -28,7 +28,7 @@ def homepage():
         # Verifica se encontrou o usuario
         if usuario:
             # Verifica se a senha que ele passou esta correra
-            if bcrypt.check_password_hash(usuario.senha.econde('utf-8'), formlogin.senha.data):
+            if bcrypt.check_password_hash(usuario.senha, formlogin.senha.data):
                 login_user(usuario)  # fazendo login
 
                 return redirect(url_for("perfil", id_usuario=usuario.id))
@@ -103,8 +103,34 @@ def feed():
     return render_template('feed.html', fotos=fotos)
 
 
-@app.route('/foto')
+@app.route('/foto/<id_usuario>/<foto>/<id_foto>', methods=['GET', 'POST'])
 @login_required
-def foto():
-    return render_template('visualisar_foto.html')
+def foto(id_usuario, foto, id_foto):
+    # Pegar nome do dono da foto
+    usuario = Usuario.query.get(id_usuario)
+
+
+    # Pegar a foto diretamente pelo id
+    fotoo = Foto.query.get(int(id_foto))  # Isso assume que o id_foto é válido e existe
+
+    # Botão formulário
+    form = Botao()
+    print(form.validate_on_submit())
+
+    if form.validate_on_submit():
+        # Verifica se o botão "Deletar Foto" foi clicado
+        if form.botao_delete.data:
+            database.session.delete(fotoo)  # Deletar a foto
+            database.session.commit()  # Salvar alterações no banco
+            flash('Foto deletada com sucesso!', 'success')  # Mensagem de sucesso
+            return redirect(url_for('perfil', id_usuario=id_usuario))  # Redirecionar para onde você desejar
+
+        # Verifica se o botão "Perfil do Usuário" foi clicado
+        elif form.botao_perfil.data:
+            print(fotoo.id_usuario)
+            return redirect(url_for('perfil', id_usuario=fotoo.id_usuario))  # Redirecionar para o perfil do usuário
+
+    # Renderizar o template
+    return render_template('visualisar_foto.html', usuario=usuario, imagem=foto, form=form)
+
 

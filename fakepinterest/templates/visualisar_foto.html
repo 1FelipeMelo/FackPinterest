@@ -1,6 +1,42 @@
 {% extends 'homepage.html' %}
-
 {% include "navbar.html" %}
 
-{% block formulario %}
-{% endblock formulario %}
+
+{% block head%}
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+    <title> Perfil - {{usuario.username}}</title>
+  </head>
+{% endblock head%}
+
+
+{% block body %}
+<body>
+
+<div class="center-container">
+    <!-- nome do usuário -->
+    <p class="usuario">Usuario - {{usuario.username}}</p>
+
+    <!-- Imagem do usuário -->
+    <img src="{{ url_for('static', filename='fotos_posts/') + imagem}}" alt="Foto do Usuário">
+    <!-- Formulário para deletar a foto -->
+    <form method="POST">
+        {% if usuario.id == current_user.id %}
+        {{form.csrf_token}}
+        {{form.botao_delete(class="btn-delete")}}
+        {% endif %}
+    </form>
+    <form method="POST">
+        {{form.csrf_token}}
+        {{form.botao_perfil(class="btn-secondary")}}
+    </form>
+</div>
+
+
+</body>
+{% endblock body %}
+
+

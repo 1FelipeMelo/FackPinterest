@@ -53,14 +53,23 @@ class FormCriarConta(FlaskForm):
         if usuario:
             raise ValidationError("O E-mail ja está cadastrado, faça login.")
 
-    def validate_senha(self, confirmacao_senha):
-
-        if confirmacao_senha:
-            raise ValidationError('Senhas Inválida')
+    # Validação da senha
+    def validate_senha(self, senha):
+        # Verificar se a confirmação da senha é igual à senha
+        if self.senha.data != self.confirmacao_senha.data:
+            raise ValidationError("As senhas não correspondem. Tente novamente.")
 
 
 # Formulário para fotos
 class FormFoto(FlaskForm):
     foto = FileField("Foto", validators=[DataRequired()])
     botao_enviar = SubmitField('Enviar')
+
+
+
+class Botao(FlaskForm):
+    botao_delete = SubmitField('Deletar Foto')
+    botao_perfil = SubmitField('Perfil do Usuário')
+
+
 

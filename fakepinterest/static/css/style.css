@@ -233,3 +233,62 @@ img {
   display: flex;
   column-gap: 20px;
 }
+
+
+
+/* Centralizando o conteúdo da página */
+.center-container {
+    display: flex;
+    flex-direction: column; /* Colocando a imagem e o botão em coluna */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Estilo da imagem */
+.center-container img {
+    max-width: 400px; /* Limitando o tamanho da imagem */
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px; /* Espaço entre a imagem e o botão */
+    border-radius: 50px;
+}
+
+/* Estilo do botão deletar */
+.btn-delete {
+    padding: 12px 24px;
+    font-size: 20px;
+    background-color: #FF0000;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+
+    margin-bottom: 20px; /* Espaço entre a imagem e o botão */
+      font-family: Montserrat;
+}
+
+/* Hover para o botão ficar estiloso */
+.btn-delete:hover {
+    background-color: #cc0000; /* Cor mais escura quando passar o mouse */
+}
+
+/* Estilo do segundo botão (cinza) */
+.btn-secondary {
+    padding: 12px 24px;
+    font-size: 20px;
+    background-color: #cccccc; /* Fundo cinza */
+    color: black; /* Texto preto */
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: Montserrat;
+}
+
+.usuario{
+    font-family: Montserrat;
+    font-size: 50px;
+    margin-bottom: 20px; /* Espaço entre a imagem e o botão */
+    color: #FF0000; /* Fundo cinza */
+}
