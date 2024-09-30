@@ -115,19 +115,17 @@ def foto(id_usuario, foto, id_foto):
 
     # Botão formulário
     form = Botao()
-    print(form.validate_on_submit())
+
 
     if form.validate_on_submit():
         # Verifica se o botão "Deletar Foto" foi clicado
         if form.botao_delete.data:
             database.session.delete(fotoo)  # Deletar a foto
             database.session.commit()  # Salvar alterações no banco
-            flash('Foto deletada com sucesso!', 'success')  # Mensagem de sucesso
             return redirect(url_for('perfil', id_usuario=id_usuario))  # Redirecionar para onde você desejar
 
         # Verifica se o botão "Perfil do Usuário" foi clicado
         elif form.botao_perfil.data:
-            print(fotoo.id_usuario)
             return redirect(url_for('perfil', id_usuario=fotoo.id_usuario))  # Redirecionar para o perfil do usuário
 
     # Renderizar o template

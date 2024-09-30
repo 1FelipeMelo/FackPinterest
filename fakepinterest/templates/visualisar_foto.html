@@ -1,42 +1,40 @@
 {% extends 'homepage.html' %}
 {% include "navbar.html" %}
 
-
-{% block head%}
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
-    <title> Perfil - {{usuario.username}}</title>
-  </head>
-{% endblock head%}
-
+{% block head %}
+    <!-- Cabeçalho da página -->
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Link para o arquivo CSS -->
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+        <title>Perfil - {{usuario.username}}</title>
+    </head>
+{% endblock head %}
 
 {% block body %}
-<body>
+    <body>
+        <div class="center-container">
+            <!-- Nome do usuário -->
+            <p class="usuario">Usuario - {{usuario.username}}</p>
 
-<div class="center-container">
-    <!-- nome do usuário -->
-    <p class="usuario">Usuario - {{usuario.username}}</p>
+            <!-- Imagem do usuário -->
+            <img src="{{ url_for('static', filename='fotos_posts/') + imagem }}" alt="Foto do Usuário">
 
-    <!-- Imagem do usuário -->
-    <img src="{{ url_for('static', filename='fotos_posts/') + imagem}}" alt="Foto do Usuário">
-    <!-- Formulário para deletar a foto -->
-    <form method="POST">
-        {% if usuario.id == current_user.id %}
-        {{form.csrf_token}}
-        {{form.botao_delete(class="btn-delete")}}
-        {% endif %}
-    </form>
-    <form method="POST">
-        {{form.csrf_token}}
-        {{form.botao_perfil(class="btn-secondary")}}
-    </form>
-</div>
+            <!-- Formulário para deletar a foto (visível apenas para o usuário logado) -->
+            <form method="POST">
+                {% if usuario.id == current_user.id %}
+                    {{form.csrf_token}}
+                    {{form.botao_delete(class="btn-delete")}}
+                {% endif %}
+            </form>
 
-
-</body>
+            <!-- Outro formulário com o botão de perfil -->
+            <form method="POST">
+                {{form.csrf_token}}
+                {{form.botao_perfil(class="btn-secondary")}}
+            </form>
+        </div>
+    </body>
 {% endblock body %}
-
-

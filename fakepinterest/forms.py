@@ -11,7 +11,10 @@ from wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationE
 
 # Vamos precisar fazer uma requisição dentro do banco de dados de usuarios, por isso estamos importadno a tabela
 from fakepinterest.models import Usuario
+from flask_bcrypt import Bcrypt
+from fakepinterest import *
 
+bcrypt = Bcrypt(app)
 
 
 class FormLoguin(FlaskForm):
@@ -19,16 +22,23 @@ class FormLoguin(FlaskForm):
     email = StringField('E-mail', validators=[DataRequired(), Email()])
     senha = PasswordField("Senha", validators=[DataRequired()])
     botao_confiramcao = SubmitField("Fazer Login")
+    usuario = Usuario.query.filter_by(email=email.data).first()
+    print(bcrypt.check_password_hash(usuario.senha, senha))
 
     # Verificar se o E-mail não esta cadastrado
     def validate_email(self, email):
 
         # Buscando E-mail que o usuario preencheu dentro do banco de dados
         usuario = Usuario.query.filter_by(email=email.data).first()
-        print(usuario)
         # Verificando Se foi encontrado um usuario cadastrado
         if not usuario:
             raise ValidationError("Usuário não cadastrado.")
+
+    def validate_senha_correta(self, senha):
+        usuario = Usuario.query.filter_by(email=self.email.data).first()
+        # Verificar se a confirmação da senha é igual à senha
+        if bcrypt.check_password_hash(usuario.senha, senha):
+            raise ValidationError("As senhas não correspondem. Tente novamente.")
 
 
 class FormCriarConta(FlaskForm):
@@ -58,6 +68,7 @@ class FormCriarConta(FlaskForm):
         # Verificar se a confirmação da senha é igual à senha
         if self.senha.data != self.confirmacao_senha.data:
             raise ValidationError("As senhas não correspondem. Tente novamente.")
+
 
 
 # Formulário para fotos
