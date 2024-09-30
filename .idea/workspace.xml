@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2a579a9e-b674-42db-b023-b62a1ca95c0c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/criar_banco.py" beforeDir="false" afterPath="$PROJECT_DIR$/criar_banco.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fakepinterest/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/fakepinterest/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fakepinterest/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/fakepinterest/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fakepinterest/templates/perfil.html" beforeDir="false" afterPath="$PROJECT_DIR$/fakepinterest/templates/perfil.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,8 +175,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.main (1)" />
         <item itemvalue="Python.criar_banco" />
+        <item itemvalue="Python.main (1)" />
         <item itemvalue="Python.models" />
         <item itemvalue="Python.routes" />
       </list>
