@@ -3,13 +3,11 @@ from fakepinterest import database, login_maneger
 from datetime import datetime
 from flask_login import UserMixin   # Esse é o que define qual class vai gerenciar o login
 
-
 # Quando vai trabalhar com usuários, precisamos obrigatoriamente definir a próxima função,
 # onde vamos procurar um usuário dentro do banco de dados.
 @login_maneger.user_loader
 def login_usuario(id_usuario):
     return Usuario.query.get(int(id_usuario))
-
 
 
 # Criando as tabelas do bandco de dados
@@ -26,7 +24,6 @@ class Usuario(database.Model, UserMixin):
     fotos = database.relationship("Foto", backref="usuario", lazy=True)
 
 
-
 class Foto(database.Model):
     # Criando informações da Foto:
 
@@ -37,3 +34,4 @@ class Foto(database.Model):
 
     # para fazer relação com o usuario
     id_usuario = database.Column(database.Integer, database.ForeignKey('usuario.id'), nullable=False)
+
