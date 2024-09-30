@@ -28,11 +28,35 @@ Ao acessar a página, você vai se deparar com a página de login, mas caso não
   O botão está localizado no canto superior esquerdo.
 ![2](https://github.com/user-attachments/assets/fc3c1b79-9d18-46a8-9097-2e1284456726)
 
-**Tecnologias Utilizadas:**
+# **Tecnologias Utilizadas:**
 
-* **Flask:** Framework web para Python, destinado ao backend.
-* **HTML/CSS:** Organização e personalização da parte visual do site.
-* **SQLite:** Criado com o flask_sqlalchemy, uma extensão do Flask.
+<table style="border: 1px solid black; border-collapse: collapse;">
+  <tr>
+    <td>
+      <h2>
+        Flask
+      </h2>
+    </td>
+    <td>
+      <h2>
+        HTML/CSS 
+      </h2>
+    </td>
+    <td> 
+      <h2>
+      SQLite:
+    </h2>
+    </td>
+  </tr>
+  
+  <tr>
+  <td>Framework web para Python, destinado ao backend.</td>
+  <td>Organização e personalização da parte visual do site.</td>
+  <td>Criado com o flask_sqlalchemy, uma extensão do Flask.</td>
+</tr>
+</table>
+
+
 
 # **Como Usar:**
 
